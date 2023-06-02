@@ -14,8 +14,8 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/lomik/elock"
-	"github.com/lomik/elock/etcd"
+	"github.com/AndriyKalashnykov/elock"
+	"github.com/AndriyKalashnykov/elock/internal/etcd"
 )
 
 const APP = "elock"
@@ -31,8 +31,8 @@ type Config struct {
 
 func stopCommand(cmd *exec.Cmd, waitTime time.Duration, cmdStopped chan bool) {
 	cmd.Process.Signal(syscall.SIGTERM)
-	timer := time.AfterFunc(waitTime, func() {cmd.Process.Kill()})
-	<- cmdStopped
+	timer := time.AfterFunc(waitTime, func() { cmd.Process.Kill() })
+	<-cmdStopped
 	timer.Stop()
 }
 

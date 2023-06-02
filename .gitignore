@@ -22,3 +22,9 @@ _testmain.go
 *.exe
 *.test
 *.prof
+
+.idea
+bin
+out
+elock_*.deb
+elock-*.rpm

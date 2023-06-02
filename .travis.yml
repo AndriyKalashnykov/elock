@@ -1,14 +1,14 @@
 language: go
 
 go:
-- 1.7.1
+- 1.20
 
 script:
 - make
 
 before_deploy:
 - sudo apt-get install -y rpm ruby
-- go get github.com/mitchellh/gox
+- go install github.com/mitchellh/gox
 - gem install fpm
 - make gox-build
 - make fpm-deb

@@ -2,22 +2,15 @@ all: build
 
 GO ?= go
 TEMPDIR:=$(shell mktemp -d)
-VERSION:=$(shell sh -c 'grep "const VERSION" main/elock.go  | cut -d\" -f2')
-NAME:=$(shell sh -c 'grep "const APP" main/elock.go  | cut -d\" -f2')
+VERSION:=$(shell sh -c 'grep "const VERSION" main/main.go  | cut -d\" -f2')
+NAME:=$(shell sh -c 'grep "const APP" main/main.go  | cut -d\" -f2')
 
 export GOPATH := ${TEMPDIR}
 
 build:
-	rm -rf ${TEMPDIR}/src
-	mkdir -p ${TEMPDIR}/src/github.com/lomik/
-	ln -s $(CURDIR) ${TEMPDIR}/src/github.com/lomik/elock
-	$(GO) build -o bin/elock main/elock.go
+	$(GO) build -o bin/elock main/main.go
 
 gox-build:
-	rm -rf ${TEMPDIR}/src
-	mkdir -p ${TEMPDIR}/src/github.com/lomik/
-	ln -s $(CURDIR) ${TEMPDIR}/src/github.com/lomik/elock
-	mkdir out/
 	gox -os="linux" -arch="amd64" -arch="386" -output="out/elock-{{.OS}}-{{.Arch}}"  github.com/lomik/elock/main
 	ls -la out/
 	mkdir -p out/root/etc/elock/

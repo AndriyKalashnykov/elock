@@ -15,7 +15,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/lomik/elock/etcd"
+	"github.com/AndriyKalashnykov/elock/internal/etcd"
 )
 
 type Options struct {
